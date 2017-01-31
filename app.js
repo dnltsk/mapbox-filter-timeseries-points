@@ -1,63 +1,110 @@
 import mapboxgl from "mapbox-gl";
 import * as d3 from "d3";
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibWlrZXdpbGxpYW1zb24iLCJhIjoibzRCYUlGSSJ9.QGvlt6Opm5futGhE5i-1kw';
-let map = new mapboxgl.Map({
-  container: 'map', // container id
-  style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
-  center: [13.3888599, 52.5170365], // starting position
-  zoom: 4 // starting zoom
+mapboxgl.accessToken = 'pk.eyJ1IjoiZG5sdHNrIiwiYSI6ImNpbXlsb3VubjAwZ2F2OWx5Znp5cXM2OHIifQ.0xaAmNZYxb68vzxxQ0yu2Q';
+var map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/light-v9',
+  center: [31.4606, 20.7927],
+  zoom: 0.5
 });
 
-let projectLonLatToMapbox = (lonlat) => {
-  let p = map.project(new mapboxgl.LngLat(lonlat[0], lonlat[1]));
-  return [p.x, p.y];
-};
+var months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
 
-let renderStations = () => {
-  stations
-      .attr("cx", function (station, i) {
-        return projectLonLatToMapbox(station.coord)[0]
-      })
-      .attr("cy", function (station, i) {
-        return projectLonLatToMapbox(station.coord)[1]
-      })
-      .style("fill", colorTable)
-      .attr("r", 8);
-};
+function filterBy(month) {
 
-let colorTable = (station) => {
-  switch (station.value) {
-    case 0:
-      return "green";
-    case 1:
-      return "yellow";
-    case 2:
-      return "red";
-    default:
-      throw Error("cannot find color for station " + JSON.stringify(station));
-  }
-};
+  var filters = ['==', 'month', month];
+  map.setFilter('earthquake-circles', filters);
+  map.setFilter('earthquake-labels', filters);
 
-map.on("viewreset", function () {
-  renderStations()
-});
-
-map.on("move", function () {
-  renderStations()
-});
-
-let container = map.getCanvasContainer();
-let svg = d3.select(container).append("svg");
-
-let stationData = [];
-for (let i = 0; i < 10000; i++) {
-  stationData.push({
-    coord: [Math.random() * 360 - 180, Math.random() * 180 - 90],
-    value: Math.floor(Math.random() * 3)
-  });
+  // Set the label to the month
+  document.getElementById('month').textContent = months[month];
 }
-let stations = svg.append("g").classed("stations", true)
-    .selectAll("circle").data(stationData).enter().append("circle");
 
-renderStations();
+map.on('load', function() {
+
+  // Data courtesy of http://earthquake.usgs.gov/
+  // Query for significant earthquakes in 2015 URL request looked like this:
+  // http://earthquake.usgs.gov/fdsnws/event/1/query
+  //    ?format=geojson
+  //    &starttime=2015-01-01
+  //    &endtime=2015-12-31
+  //    &minmagnitude=6'
+  //
+  // Here we're using d3 to help us make the ajax request but you can use
+  // Any request method (library or otherwise) you wish.
+  d3.json('significant-earthquakes-2015.geojson', function(err, data) {
+    if (err) throw err;
+
+    // Create a month property value based on time
+    // used to filter against.
+    data.features = data.features.map(function(d) {
+      d.properties.month = new Date(d.properties.time).getMonth();
+      return d;
+    });
+
+    map.addSource('earthquakes', {
+      'type': 'geojson',
+      'data': data
+    });
+
+    map.addLayer({
+      'id': 'earthquake-circles',
+      'type': 'circle',
+      'source': 'earthquakes',
+      'paint': {
+        'circle-color': {
+          property: 'mag',
+          stops: [
+            [6, '#FCA107'],
+            [8, '#7F3121']
+          ]
+        },
+        'circle-opacity': 0.75,
+        'circle-radius': {
+          property: 'mag',
+          stops: [
+            [6, 20],
+            [8, 40]
+          ]
+        }
+      }
+    });
+
+    map.addLayer({
+      'id': 'earthquake-labels',
+      'type': 'symbol',
+      'source': 'earthquakes',
+      'layout': {
+        'text-field': '{mag}m',
+        'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+        'text-size': 12
+      },
+      'paint': {
+        'text-color': 'rgba(0,0,0,0.5)'
+      }
+    });
+
+    // Set filter to first month of the year
+    // 0 = January
+    filterBy(0);
+
+    document.getElementById('slider').addEventListener('input', function(e) {
+      var month = parseInt(e.target.value, 10);
+      filterBy(month);
+    });
+  });
+});
