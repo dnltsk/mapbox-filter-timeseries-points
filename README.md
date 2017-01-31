@@ -1,11 +1,5 @@
-# Mapbox D3 Timeseries Points (Proof of Concept)
-Timeseries data as D3 overlay on Mapbox
-
-**STATUS: discontinued because d3 can't handle >=10k circles efficiently!**
-
-[!]
-
-=> Mapbox GL together with [Filters](https://www.mapbox.com/mapbox-gl-style-spec/#types-filter) looks more promissing!
+# Mapbox Filter Timeseries Points (Proof of Concept)
+Animation of timeseries data via WebGL overlay on Mapbox. Selection of time-related value via [Filters](https://www.mapbox.com/mapbox-gl-style-spec/#types-filter).
 
 ## environment
 * npm v4.0.2
@@ -17,16 +11,11 @@ Timeseries data as D3 overlay on Mapbox
 
 ## start
 1. `npm run start`
-2. open http://localhost:3000/
+2. open `http://localhost:3000/`
 
 ## references
-General:
-* Using mapbox-gl and webpack together
-https://mikewilliamson.wordpress.com/2016/02/24/using-mapbox-gl-and-webpack-together/
-
-D3 Overlay:
-* Mapbox-gl -> d3 projection
-https://bl.ocks.org/enjalot/1ed5d9795b82f846759f89029b0b8ff3
+Discontinued PoC of solving the problem with D3 overlaz
+* https://github.com/dnltsk/mapbox-d3-timeseries-points
 
 Mapbox GL Layer:
 * https://www.mapbox.com/mapbox-gl-js/example/data-driven-circle-colors/
