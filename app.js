@@ -5,106 +5,71 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZG5sdHNrIiwiYSI6ImNpbXlsb3VubjAwZ2F2OWx5Znp5c
 var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/light-v9',
-  center: [31.4606, 20.7927],
-  zoom: 0.5
+  center: [13.3096834, 52.515747],
+  zoom: 8
 });
 
-var months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December'
+var timeslides = [
+  '2017-01-31T00:00:00Z',
+  '2017-01-31T00:20:00Z',
+  '2017-01-31T00:40:00Z',
+  '2017-01-31T01:00:00Z',
+  '2017-01-31T01:20:00Z',
+  '2017-01-31T01:40:00Z',
+  '2017-01-31T02:00:00Z',
+  '2017-01-31T02:20:00Z',
+  '2017-01-31T02:40:00Z',
+  '2017-01-31T03:00:00Z'
 ];
 
-function filterBy(month) {
+function filterBy(timeslideIndex) {
+  var selectedTime = timeslides[timeslideIndex];
+  console.log("selectedTime: ", selectedTime);
 
-  var filters = ['==', 'month', month];
-  map.setFilter('earthquake-circles', filters);
-  map.setFilter('earthquake-labels', filters);
+  map.setFilter('observations',
+      [
+        "all",
+        ['>=', 'validFrom', "2017-01-31T01:20:00Z"],
+        ['<', 'validTo', "2017-01-31T01:20:00Z"]
+      ]);
 
   // Set the label to the month
-  document.getElementById('month').textContent = months[month];
+  document.getElementById('month').textContent = selectedTime;
 }
 
-map.on('load', function() {
-
-  // Data courtesy of http://earthquake.usgs.gov/
-  // Query for significant earthquakes in 2015 URL request looked like this:
-  // http://earthquake.usgs.gov/fdsnws/event/1/query
-  //    ?format=geojson
-  //    &starttime=2015-01-01
-  //    &endtime=2015-12-31
-  //    &minmagnitude=6'
-  //
-  // Here we're using d3 to help us make the ajax request but you can use
-  // Any request method (library or otherwise) you wish.
-  d3.json('significant-earthquakes-2015.geojson', function(err, data) {
+map.on('load', function () {
+  d3.json('observations.json', function (err, data) {
     if (err) throw err;
 
-    // Create a month property value based on time
-    // used to filter against.
-    data.features = data.features.map(function(d) {
-      d.properties.month = new Date(d.properties.time).getMonth();
-      return d;
-    });
-
-    map.addSource('earthquakes', {
+    map.addSource('observations-source', {
       'type': 'geojson',
       'data': data
     });
 
-    map.addLayer({
-      'id': 'earthquake-circles',
+    var observationLayer = map.addLayer({
+      'id': 'observations',
       'type': 'circle',
-      'source': 'earthquakes',
+      'source': 'observations-source',
       'paint': {
         'circle-color': {
-          property: 'mag',
+          property: 'value',
           stops: [
-            [6, '#FCA107'],
-            [8, '#7F3121']
+            [1, '#FCA107'],
+            [2, '#7F3121'],
+            [3, '#bb0000']
           ]
         },
-        'circle-opacity': 0.75,
-        'circle-radius': {
-          property: 'mag',
-          stops: [
-            [6, 20],
-            [8, 40]
-          ]
-        }
+        'circle-opacity': 0.5,
+        'circle-radius': 7
       }
     });
 
-    map.addLayer({
-      'id': 'earthquake-labels',
-      'type': 'symbol',
-      'source': 'earthquakes',
-      'layout': {
-        'text-field': '{mag}m',
-        'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
-        'text-size': 12
-      },
-      'paint': {
-        'text-color': 'rgba(0,0,0,0.5)'
-      }
-    });
-
-    // Set filter to first month of the year
-    // 0 = January
+    //initial filter
     filterBy(0);
 
-    document.getElementById('slider').addEventListener('input', function(e) {
-      var month = parseInt(e.target.value, 10);
-      filterBy(month);
+    document.getElementById('slider').addEventListener('input', function (e) {
+      var timeslideIndex = parseInt(e.target.value, 10);
+      filterBy(timeslideIndex);
     });
   });
 });
