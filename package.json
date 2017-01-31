@@ -1,0 +1,42 @@
+{
+  "name": "mapbox-d3-timeseries-points",
+  "version": "1.0.0",
+  "description": "Timeseries data as D3 overlay on Mapbox ",
+  "main": "app.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "http-server -p 3000 ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnltsk/mapbox-d3-timeseries-points.git"
+  },
+  "keywords": [
+    "mapbox",
+    "d3",
+    "timeseries",
+    "animation",
+    "station data"
+  ],
+  "author": "dnltsk",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/dnltsk/mapbox-d3-timeseries-points/issues"
+  },
+  "homepage": "https://github.com/dnltsk/mapbox-d3-timeseries-points",
+  "dependencies": {
+    "d3": "^4.5.0",
+    "mapbox-gl": "^0.32.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "http-server": "^0.9.0",
+    "json-loader": "^0.5.4",
+    "transform-loader": "^0.2.3",
+    "webpack": "^1.14.0",
+    "webworkify-webpack": "^2.0.1"
+  }
+}
