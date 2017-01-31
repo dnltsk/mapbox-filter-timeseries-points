@@ -28,9 +28,9 @@ function filterBy(timeslideIndex) {
 
   map.setFilter('observations',
       [
-        "all",
-        ['>=', 'validFrom', "2017-01-31T01:20:00Z"],
-        ['<', 'validTo', "2017-01-31T01:20:00Z"]
+        'all',
+        ['<=', 'validFrom', selectedTime],
+        ['>', 'validTo', selectedTime]
       ]);
 
   // Set the label to the month
