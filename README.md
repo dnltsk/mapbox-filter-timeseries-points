@@ -34,6 +34,7 @@ Mapbox overlay filters the valid data points to a given timestamp.
     ]);
 ```
 
+## results
 :+1: easy to implement<br />
 :+1: explicit validity timerange of obs data, defined by validAt and validFrom<br />
 :+1: would work for mobile stations
