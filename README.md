@@ -3,19 +3,7 @@ Animation of timeseries data via WebGL overlay on Mapbox. Selection of time-rela
 
 ## environment
 * npm v4.0.2, node v7.2.0
-* java v8, mvn v3
-* 
-
-## client module
-* `cd client`
-
-### build
-* `npm install`
-* `npm run build`
-
-### start
-1. `npm run start`
-2. open `http://localhost:3000/`
+* java v8, mvn v3 
 
 ## server module
 * `cd server`
@@ -24,8 +12,18 @@ Animation of timeseries data via WebGL overlay on Mapbox. Selection of time-rela
 * `mvn package`
 
 ### start
-* `java -jar target/*.java`
+* `java -jar target/*.jar`
 
+## client module
+* `cd client`
+
+### build
+0. `npm install`
+1. `npm run build`
+
+### start
+1. `npm run start`
+2. open `http://localhost:3000/`
 
 ## references
 Discontinued PoC of solving the problem with D3 overlaz
