@@ -10,16 +10,16 @@ var map = new mapboxgl.Map({
 });
 
 var timeslides = [
-  '2017-01-31T00:00:00Z',
-  '2017-01-31T00:20:00Z',
-  '2017-01-31T00:40:00Z',
-  '2017-01-31T01:00:00Z',
-  '2017-01-31T01:20:00Z',
-  '2017-01-31T01:40:00Z',
-  '2017-01-31T02:00:00Z',
-  '2017-01-31T02:20:00Z',
-  '2017-01-31T02:40:00Z',
-  '2017-01-31T03:00:00Z'
+  '2017-01-01T00:00:00Z',
+  '2017-01-01T00:20:00Z',
+  '2017-01-01T00:40:00Z',
+  '2017-01-01T01:00:00Z',
+  '2017-01-01T01:20:00Z',
+  '2017-01-01T01:40:00Z',
+  '2017-01-01T02:00:00Z',
+  '2017-01-01T02:20:00Z',
+  '2017-01-01T02:40:00Z',
+  '2017-01-01T03:00:00Z'
 ];
 
 function filterBy(timeslideIndex) {
@@ -38,8 +38,10 @@ function filterBy(timeslideIndex) {
 }
 
 map.on('load', function () {
-  d3.json('observations.json', function (err, data) {
+  d3.json('http://localhost:8080/obs', function (err, data) {
     if (err) throw err;
+
+    console.log(data.features.length);
 
     map.addSource('observations-source', {
       'type': 'geojson',
@@ -54,6 +56,7 @@ map.on('load', function () {
         'circle-color': {
           property: 'value',
           stops: [
+            [0, '#000000'],
             [1, '#FCA107'],
             [2, '#7F3121'],
             [3, '#bb0000']

@@ -1,5 +1,7 @@
-/*.iml
-/.idea
+*.iml
+.idea
+npm-debug.log
 
-/bundle.js
-/node_modules
+/client/bundle.js
+/client/node_modules
+/server/target
