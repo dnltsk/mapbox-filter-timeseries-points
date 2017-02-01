@@ -6,7 +6,7 @@ Animation of timeseries data via WebGL overlay on Mapbox. Selection of time-rela
 ## Basic concept
 
 GeoJSON contains atomic data points of coordinates, values and valid timerange.
-```
+```json
   ...
   {
     "type":"Feature",
