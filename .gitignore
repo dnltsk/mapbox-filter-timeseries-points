@@ -2,6 +2,6 @@
 .idea
 npm-debug.log
 
-/client/bundle.js
-/client/node_modules
-/server/target
+client/bundle.js
+client/node_modules
+server/target
