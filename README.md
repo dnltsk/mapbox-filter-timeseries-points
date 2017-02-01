@@ -12,7 +12,8 @@ Animation of timeseries data via WebGL overlay on Mapbox. Selection of time-rela
 * `mvn package`
 
 ### start
-* `java -jar target/*.jar`
+1. `java -jar target/*.jar`
+2. open `http://localhost:8080/obs`
 
 ## client module
 * `cd client`
