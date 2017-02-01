@@ -2,16 +2,30 @@
 Animation of timeseries data via WebGL overlay on Mapbox. Selection of time-related value via [Filters](https://www.mapbox.com/mapbox-gl-style-spec/#types-filter).
 
 ## environment
-* npm v4.0.2
-* node v7.2.0
+* npm v4.0.2, node v7.2.0
+* java v8, mvn v3
+* 
 
-## build
+## client module
+* `cd client`
+
+### build
 * `npm install`
 * `npm run build`
 
-## start
+### start
 1. `npm run start`
 2. open `http://localhost:3000/`
+
+## server module
+* `cd server`
+
+### build
+* `mvn package`
+
+### start
+* `java -jar target/*.java`
+
 
 ## references
 Discontinued PoC of solving the problem with D3 overlaz
