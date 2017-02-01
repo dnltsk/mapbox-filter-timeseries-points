@@ -9,16 +9,16 @@ GeoJSON contains atomic data points of coordinates, values and valid timerange.
 ```json
   ...
   {
-    type : "Feature",
-    geometry : {
-      type : "Point",
-      coordinates : [-2.088878872099855,62.408835443652805]
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [-2.088878872099855,62.408835443652805]
     },
-    properties : {
-      stationId : 815,
-      value : 3.0,
-      validFrom : "2017-01-01T12:15:00Z",
-      validTo : "2017-01-01T14:05:00Z"
+    "properties" : {
+      "stationId" : 815,
+      "value" : 3.0,
+      "validFrom" : "2017-01-01T12:15:00Z",
+      "validTo" : "2017-01-01T14:05:00Z"
     }
   }
   ...
