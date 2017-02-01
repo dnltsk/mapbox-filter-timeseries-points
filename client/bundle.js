@@ -69,13 +69,13 @@
 	var timeslides = ['2017-01-01T00:00:00Z', '2017-01-01T00:20:00Z', '2017-01-01T00:40:00Z', '2017-01-01T01:00:00Z', '2017-01-01T01:20:00Z', '2017-01-01T01:40:00Z', '2017-01-01T02:00:00Z', '2017-01-01T02:20:00Z', '2017-01-01T02:40:00Z', '2017-01-01T03:00:00Z'];
 
 	function filterBy(timeslideIndex) {
-	  var selectedTime = timeslides[timeslideIndex];
-	  console.log("selectedTime: ", selectedTime);
+	  var givenTimestamp = timeslides[timeslideIndex];
+	  console.log("selectedTime: ", givenTimestamp);
 
-	  map.setFilter('observations', ['all', ['<=', 'validFrom', selectedTime], ['>', 'validTo', selectedTime]]);
+	  map.setFilter('observations', ['all', ['<=', 'validFrom', givenTimestamp], ['>', 'validTo', givenTimestamp]]);
 
 	  // Set the label to the month
-	  document.getElementById('month').textContent = selectedTime;
+	  document.getElementById('month').textContent = givenTimestamp;
 	}
 
 	map.on('load', function () {

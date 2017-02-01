@@ -23,18 +23,18 @@ var timeslides = [
 ];
 
 function filterBy(timeslideIndex) {
-  var selectedTime = timeslides[timeslideIndex];
-  console.log("selectedTime: ", selectedTime);
+  var givenTimestamp = timeslides[timeslideIndex];
+  console.log("selectedTime: ", givenTimestamp);
 
   map.setFilter('observations',
       [
         'all',
-        ['<=', 'validFrom', selectedTime],
-        ['>', 'validTo', selectedTime]
+        ['<=', 'validFrom', givenTimestamp],
+        ['>', 'validTo', givenTimestamp]
       ]);
 
   // Set the label to the month
-  document.getElementById('month').textContent = selectedTime;
+  document.getElementById('month').textContent = givenTimestamp;
 }
 
 map.on('load', function () {
