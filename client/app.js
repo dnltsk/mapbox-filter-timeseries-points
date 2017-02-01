@@ -6,7 +6,7 @@ var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/light-v9',
   center: [13.3096834, 52.515747],
-  zoom: 6
+  zoom: 4
 });
 
 var timeslides = [
