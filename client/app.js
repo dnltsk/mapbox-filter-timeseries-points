@@ -35,11 +35,9 @@ var timeslides = [
   '2017-01-01T23:00:00Z', '2017-01-01T23:10:00Z', '2017-01-01T23:20:00Z', '2017-01-01T23:30:00Z', '2017-01-01T23:40:00Z', '2017-01-01T23:50:00Z'
 ];
 
-console.log(timeslides.length);
-
 function filterBy(timeslideIndex) {
   var givenTimestamp = timeslides[timeslideIndex];
-  console.log("selectedTime: ", givenTimestamp);
+  console.log("givenTimestamp: ", givenTimestamp);
 
   map.setFilter('observations',
       [
