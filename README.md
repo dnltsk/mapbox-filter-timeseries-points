@@ -34,11 +34,12 @@ Mapbox overlay filters the valid data points to a given timestamp.
     ]);
 ```
 
-:+1: advantage: easy to implement<br />
-:+1: advantage: explicit validity timerange of obs data, defined by validAt and validFrom<br />
-:+1: advantage: would work for mobile stations<br />
-:-1: disadvantage: data volume (24k features for 10k stations - 24 observations each)<br />
-:-1: disadvantage: suboptimal performance (two filters for each data point)
+:+1: easy to implement<br />
+:+1: explicit validity timerange of obs data, defined by validAt and validFrom<br />
+:+1: would work for mobile stations
+
+:-1: data volume (24k features for 10k stations - 24 observations each)<br />
+:-1: suboptimal performance (two filters for each data point)
 
 ## environment
 * npm v4.0.2, node v7.2.0
