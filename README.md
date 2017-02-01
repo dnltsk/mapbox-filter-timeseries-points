@@ -47,22 +47,16 @@ Mapbox overlay filters the valid data points to a given timestamp.
 ## server module
 * `cd server`
 
-### build
-* `mvn package`
-
-### start
-1. `java -jar target/*.jar`
+### build and start
+1. `mvn spring-boot:run`
 2. open `http://localhost:8080/obs`
 
 ## client module
 * `cd client`
 
-### build
+### build and start
 0. `npm install`
-1. `npm run build`
-
-### start
-1. `npm run start`
+1. `npm run build && npm run start`
 2. open `http://localhost:3000/`
 
 ## references
