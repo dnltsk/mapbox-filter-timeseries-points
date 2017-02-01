@@ -5,7 +5,7 @@ Animation of timeseries data via WebGL overlay on Mapbox. Selection of time-rela
 
 ## Basic concept
 
-GeoJSON contains atomic data points of coordinates, values and valid timerange.
+GeoJSON contains atomic data points of (1) coordinates (2) value and (3) validity timerange.
 ```json
   ...
   {
@@ -34,11 +34,11 @@ Mapbox overlay filters the valid data points to a given timestamp.
     ]);
 ```
 
-* :+1: advantage: easy to implement
-* :+1: advantage: explicit validness of obs data, defined by validAt and validFrom
-* :+1: advantage: would work for mobile stations
-* :-1: disadvantage: data volume (24k features for 10k stations - 24 observations each)
-* :-1: disadvantage: suboptimal performance (two filters for each data point)
+:+1: advantage: easy to implement<br />
+:+1: advantage: explicit validity timerange of obs data, defined by validAt and validFrom<br />
+:+1: advantage: would work for mobile stations<br />
+:-1: disadvantage: data volume (24k features for 10k stations - 24 observations each)<br />
+:-1: disadvantage: suboptimal performance (two filters for each data point)
 
 ## environment
 * npm v4.0.2, node v7.2.0
