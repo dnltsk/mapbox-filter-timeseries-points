@@ -82,8 +82,6 @@
 	  d3.json('http://localhost:8080/obs', function (err, data) {
 	    if (err) throw err;
 
-	    console.log(data.features.length);
-
 	    map.addSource('observations-source', {
 	      'type': 'geojson',
 	      'data': data
