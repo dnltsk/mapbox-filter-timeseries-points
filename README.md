@@ -3,7 +3,7 @@ Animation of timeseries data via WebGL overlay on Mapbox. Selection of time-rela
 
 ![screenshot](screenshot.png "screenshot")
 
-## Basic concept
+## basic concept
 
 GeoJSON contains atomic data points of (1) coordinates (2) value and (3) validity timerange.
 ```json
@@ -62,7 +62,7 @@ Mapbox overlay filters the valid data points to a given timestamp.
 2. open `http://localhost:3000/`
 
 ## references
-Discontinued PoC of solving the problem with D3 overlaz
+Discontinued PoC of solving the problem with D3 overlay
 * https://github.com/dnltsk/mapbox-d3-timeseries-points
 
 Mapbox GL Layer:
